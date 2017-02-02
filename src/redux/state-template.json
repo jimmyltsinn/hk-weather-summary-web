@@ -1,0 +1,44 @@
+{
+	"select": {
+
+	},
+	"chart": {
+		"type": ("1" / "2" / "3"),
+		"lines": {
+			"temp_avg": true,
+			"temp_min": false,
+			...
+		},
+		"year": {
+			"2016": true,
+		},
+		"yearRange": [1900, 2016],
+		"solarTerm": {
+      "1": true,
+      "2": false,
+      ...
+    }
+	},
+	"data": {
+		"byYear": {
+			"2016": {
+				"isFetching": true,
+				"data": []
+			}, ...
+		},
+		"bySolarTerm": {
+			"1": {
+				"isFetching": false,
+				"data": []
+			}, ...
+		},
+		"byDate": {
+			"1": {
+				"27": {
+					"isFetching": false,
+					"data": []
+				}, ...
+			}
+		}
+	}
+}

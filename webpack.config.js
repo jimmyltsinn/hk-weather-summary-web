@@ -19,7 +19,10 @@ module.exports = {
       }
     ]
   },
-  'plugins': [
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+  plugins: [
     // new webpack.optimize.UglifyJsPlugin({
     //     compress: {
     //         warnings: false,
@@ -29,7 +32,7 @@ module.exports = {
     //     },
     // }),
     new HtmlWebpackPlugin({
-      title: 'React-Redux Todo',
+      title: 'HK Weather Summary',
       template: './src/index.ejs'
     }),
     new webpack.DefinePlugin({
