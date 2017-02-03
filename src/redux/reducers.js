@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import {
-	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM,
+	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM, SELECT_CHART_SOLARTERM_TOGGLE,
 	FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS,
 	ChartTypes
 } from './actions.js';
@@ -39,10 +39,17 @@ function yearRange(state = {min: 1900, max: 2016}, action) {
 }
 
 function solarTerm(state = {
-  '1': true
+  1: true,
+	3: true
 }, action) {
 	switch (action.type) {
 		case SELECT_CHART_SOLARTERM: return action.solarTerm;
+		case SELECT_CHART_SOLARTERM_TOGGLE:
+		{
+			let ret = Object.assign({}, state);
+			ret[action.solarTerm] = action.selected;
+			return ret;
+		}
 		default: return state;
 	}
 }

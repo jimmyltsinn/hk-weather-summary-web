@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
-import ChartTypeComponent from './ControlBar/ChartTypeComponent'; 
+import ChartTypeComponent from './ControlBar/ChartTypeComponent';
 import YearRangeComponent from './ControlBar/YearRangeComponent';
+import SolarTermComponent from './ControlBar/SolarTermComponent';
 
 const ControlBar = () => {
   const SelectChartType = (
@@ -20,10 +21,17 @@ const ControlBar = () => {
     </ToolbarGroup>
   );
 
+  const SelectSolarTerm = (
+    <ToolbarGroup>
+      <SolarTermComponent />
+    </ToolbarGroup>
+  )
+
   return (
     <Toolbar label="Default">
       {SelectChartType}
       {SelectYearRange}
+      {SelectSolarTerm}
     </Toolbar>
   );
 };
