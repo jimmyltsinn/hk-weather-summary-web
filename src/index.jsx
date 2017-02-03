@@ -11,7 +11,8 @@ let store = createStore(reducer);
 
 injectTapEventPlugin();
 
-store.subscribe(() => console.log(store.getState()));
+console.log('[Redux] Init', store.getState());
+store.subscribe(() => console.log('[Redux] Update', store.getState()));
 
 ReactDOM.render(
 	<Provider store={store}>

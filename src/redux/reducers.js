@@ -2,10 +2,11 @@ import { combineReducers } from 'redux';
 
 import {
 	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM,
-	FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS
+	FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS,
+	ChartTypes
 } from './actions.js';
 
-function type(state = '1', action) {
+function type(state = 'BY_SOLARTERM', action) {
 	switch (action.type) {
 		case SELECT_CHART_TYPE: return action.chartType;
 		default: return state;
@@ -30,7 +31,7 @@ function year(state = {
 	}
 }
 
-function yearRange(state = [1900, 2016], action) {
+function yearRange(state = {min: 1900, max: 2016}, action) {
 	switch (action.type) {
 		case SELECT_CHART_YEARRANGE: return action.yearRange;
 		default: return state;

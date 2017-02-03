@@ -8,6 +8,12 @@ export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 
+export const ChartTypes = {
+	BY_SOLARTERM: 'By Solar Term',
+	BY_DATE: 'By Date',
+  BY_YEAR: 'By Year'
+};
+
 export let selectChartType = chartType => ({
 	type: SELECT_CHART_TYPE,
 	chartType
@@ -23,9 +29,9 @@ export let selectChartYears = years => ({
 	years
 });
 
-export let selectChartYearRange = (start, end) => ({
+export let selectChartYearRange = (range) => ({
 	type: SELECT_CHART_YEARRANGE,
-	yearRange: [start, end]
+	yearRange: range
 });
 
 export let selectChartSolarTerm = solarTerm => ({
