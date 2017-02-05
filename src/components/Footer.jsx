@@ -1,15 +1,12 @@
 import React from 'react';
 
-import {connect} from 'react-redux';
-
 import Paper from 'material-ui/Paper';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {grey900, grey500} from 'material-ui/styles/colors';
 
 const style = (muiTheme) => {
-	let ret = muiTheme.toolbar;
+	let ret = Object.assign({}, muiTheme.toolbar);
 	ret.background = grey900;
 	ret.color = grey500;
 	ret.textAlign = 'center';

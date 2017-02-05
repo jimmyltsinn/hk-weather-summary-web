@@ -12,9 +12,9 @@ const theme = getMuiTheme({
     primary2Color: lightBlue700,
     pickerHeaderColor: lightBlue500,
   },
-  appBar: {
-    height: 50,
-  },
+  // appBar: {
+  //   height: 50,
+  // },
 });
 
 

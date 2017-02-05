@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {toggleSolarTerm} from '../../redux/actions';
 
+import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import {FlatButton, Checkbox} from 'material-ui';
 import {GridList} from 'material-ui/GridList';
 import {ListItem} from 'material-ui/List';
@@ -11,9 +12,12 @@ import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 let unorm = require('unorm');
 
 const style = {
+  popover: {
+    width: 400
+  },
   gridList: {
     width: 400,
-    overflowX: 'auto',
+    overflowX: 'hidden',
     overflowY: 'auto'
   },
   gridTile: {
@@ -29,11 +33,21 @@ class SolarTermComponent extends React.Component {
     };
   }
 
+  buttonLabel() {
+    let checkedList = Object.keys(this.props.checked).filter(i => this.props.checked[i]).map(i => this.props.checked[i] ? this.props.map[i] : '');
+    let buttonLabel = checkedList.slice(0, 3).join(', ');
+    if (checkedList.length > 3) buttonLabel += ' ...';
+    if (buttonLabel == '') buttonLabel = 'Select';
+
+    return buttonLabel;
+  }
+
   render() {
     return (
-      <div>
+      <ToolbarGroup>
+        <ToolbarTitle text="Solar Terms" />
         <FlatButton
-          label="Solar Terms"
+          label={this.buttonLabel()}
           onTouchTap={(event) => {
             event.preventDefault();
             this.setState({
@@ -44,6 +58,7 @@ class SolarTermComponent extends React.Component {
           <Popover
             open={this.state.open}
             anchorEl={this.state.anchorEl}
+            style={style.popover}
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
             onRequestClose={() => this.setState({open: false})}
@@ -66,7 +81,7 @@ class SolarTermComponent extends React.Component {
                 }
             </GridList>
           </Popover>
-    </div>
+    </ToolbarGroup>
     );
   }
 }

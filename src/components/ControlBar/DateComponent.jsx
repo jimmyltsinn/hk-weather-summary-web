@@ -4,8 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {selectChartDateMonth, selectChartDateDate} from '../../redux/actions';
 
-import {FlatButton, Checkbox} from 'material-ui';
-import {List, ListItem} from 'material-ui/List';
+import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import {MenuItem, DropDownMenu} from 'material-ui';
 
 let zeroPaddingStr = (num, len) => ((new Array(len).join('0') + num).slice(-len));
@@ -18,14 +17,16 @@ class YearComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        <DropDownMenu value={this.props.month} onChange={this.props.handleMonthChange}>
+      <ToolbarGroup>
+        <ToolbarTitle text="Month" />
+        <DropDownMenu value={this.props.month} onChange={this.props.handleMonthChange} style={{height: '100%'}}>
           {_.range(1, 13).map(i => <MenuItem key={i} value={i} primaryText={zeroPaddingStr(i, 2)} />)}
         </DropDownMenu>
-        <DropDownMenu value={this.props.date} onChange={this.props.handleDateChange}>
+        <ToolbarTitle text="Date" />
+        <DropDownMenu value={this.props.date} onChange={this.props.handleDateChange} style={{height: '100%'}}>
           {_.range(1, this.props.month == 2 ? 30 : [4, 6, 9, 11].includes(this.props.month) ? 31 : 32).map(i => <MenuItem key={i} value={i} primaryText={zeroPaddingStr(i, 2)} />)}
         </DropDownMenu>
-      </div>
+      </ToolbarGroup>
     );
   }
 }

@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {toggleYear} from '../../redux/actions';
 
+import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import {FlatButton, Checkbox} from 'material-ui';
 import List, {ListItem} from 'material-ui/List';
 import Popover, {PopoverAnimationVertical, PopoverAnimationHorizontal} from 'material-ui/Popover';
@@ -19,11 +20,21 @@ class Component extends React.Component {
     this.state = state;
   }
 
+  buttonLabel() {
+    let checkedList = Object.keys(this.props.checked).filter(i => this.props.checked[i]).map(i => this.props.checked[i] ? i : '');
+    let buttonLabel = checkedList.slice(0, 3).join(', ');
+    if (checkedList.length > 3) buttonLabel += ' ...';
+    if (buttonLabel == '') buttonLabel = 'Select';
+
+    return buttonLabel;
+  }
+
   render() {
     return (
-      <div>
+      <ToolbarGroup>
+        <ToolbarTitle text="Years" />
         <FlatButton
-          label="Years"
+          label={this.buttonLabel()}
           onTouchTap={(event) => {
             event.preventDefault();
             this.setState({
@@ -57,6 +68,7 @@ class Component extends React.Component {
               ))}
             </List>
           </Popover>
+          {/* 2nd level menu */}
           {_.range(1900, 2017, pageStep).map(i => (
             <Popover
               key={i}
@@ -82,9 +94,8 @@ class Component extends React.Component {
                 ) : '')}
               </List>
             </Popover>
-
           ))}
-      </div>
+      </ToolbarGroup>
     );
   }
 }

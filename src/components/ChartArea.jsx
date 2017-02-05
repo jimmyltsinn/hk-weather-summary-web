@@ -4,10 +4,6 @@ import {connect} from 'react-redux';
 
 import Paper from 'material-ui/Paper';
 
-const style = {
-	height: '100%'
-};
-
 class ChartArea extends React.Component {
 	constructor() {
 		super();
@@ -16,7 +12,6 @@ class ChartArea extends React.Component {
 	render() {
 		return (
 			<Paper
-				style={style}
 				zDepth={0}>
 			</Paper>
 		);

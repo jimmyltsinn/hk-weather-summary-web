@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {selectChartYearRange} from '../../redux/actions';
 
+import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import {FlatButton} from 'material-ui';
 import Paper from 'material-ui/Paper';
 
@@ -39,11 +40,16 @@ class YearRangeComponent extends React.Component {
     this.setState({values: values});
   }
 
+  buttonLabel() {
+    return `${this.props.values.min} - ${this.props.values.max}`;
+  }
+
   render() {
     return (
-      <div>
+      <ToolbarGroup>
+        <ToolbarTitle text="Year Range" />
         <FlatButton
-          label={this.props.buttonText}
+          label={this.buttonLabel()}
           onTouchTap={(event) => {
             event.preventDefault();
             this.setState({
@@ -67,7 +73,7 @@ class YearRangeComponent extends React.Component {
                 onChangeComplete={this.props.handleChange} />
             </Paper>
         </Popover>
-      </div>
+      </ToolbarGroup>
     );
   }
 }
@@ -79,8 +85,7 @@ YearRangeComponent.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  values: state.chart.yearRange,
-  buttonText: `Year: ${state.chart.yearRange.min} - ${state.chart.yearRange.max}`
+  values: state.chart.yearRange
 });
 
 const mapDispatchToProps = (dispatch) => ({handleChange: values => dispatch(selectChartYearRange(values))});
