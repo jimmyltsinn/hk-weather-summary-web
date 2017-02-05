@@ -1,49 +1,34 @@
 import React from 'react';
 
-import { AppBar, FlatButton } from 'material-ui';
+import Header from './Header';
 import ControlBar from './ControlBar';
+import ChartArea from './ChartArea';
+import Footer from './Footer';
 
-import { connect } from 'react-redux';
-import { selectChartType } from '../redux/actions';
-
-class Main extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     chartType: "1"
-  //     // theme: getMuiTheme(lightBaseTheme)
-  //   };
-  // }
-
-  // handleChartTypeChange(event, index, value) {
-  //   this.setState({
-  //     chartType: value
-  //   });
-  // }
-
-  render() {
-    return (
-      <div>
-        <AppBar
-          title="HK Weather Summary"
-          iconElementLeft={<div></div>}
-          iconElementRight={<FlatButton label="Change Theme" onTouchTap={this.handleChangeTheme} disabled={true} />} />
-        <ControlBar />
-      </div>
-    );
+const style = {
+  top: {
+    display: 'flex',
+    minHeight: '100vh',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: 1
   }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    // chartType: state.chart.type
-  };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleChartTypeChange: (event, index, value) => dispatch(selectChartType(value))
-  };
-};
+const Main = () => (
+  <div style={style.top}>
+    <header>
+      <Header />
+    </header>
+    <div style={style.content}>
+      <ControlBar />
+      <ChartArea />
+    </div>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;

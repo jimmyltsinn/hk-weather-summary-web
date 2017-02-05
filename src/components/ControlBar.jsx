@@ -39,12 +39,13 @@ const ControlBar = () => {
     <ToolbarGroup>
       <DateComponent />
     </ToolbarGroup>
-  ); 
+  );
 
   return (
     <Toolbar label="Default">
       {SelectChartType}
       {SelectYearRange}
+      {SelectYear}
       {SelectSolarTerm}
       {SelectYear}
       {SelectDate}

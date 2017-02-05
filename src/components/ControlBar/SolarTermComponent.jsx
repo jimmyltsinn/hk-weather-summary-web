@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {toggleSolarTerm} from '../../redux/actions';
 
 import {FlatButton, Checkbox} from 'material-ui';
-import {GridList, GridTile} from 'material-ui/GridList';
-import {List, ListItem} from 'material-ui/List';
+import {GridList} from 'material-ui/GridList';
+import {ListItem} from 'material-ui/List';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 
 let unorm = require('unorm');
@@ -13,6 +13,7 @@ let unorm = require('unorm');
 const style = {
   gridList: {
     width: 400,
+    overflowX: 'auto',
     overflowY: 'auto'
   },
   gridTile: {

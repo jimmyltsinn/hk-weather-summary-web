@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import {
-	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM, SELECT_CHART_SOLARTERM_TOGGLE, SELECT_CHART_DATE_MONTH, SELECT_CHART_DATE_DATE,
+	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM, SELECT_CHART_SOLARTERM_TOGGLE, SELECT_CHART_DATE_MONTH, SELECT_CHART_DATE_DATE, SELECT_CHART_YEARS_TOGGLE,
 	FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS,
 	ChartTypes
 } from './actions.js';
@@ -22,11 +22,16 @@ function lines(state = {
 	}
 }
 
-function year(state = {
+function years(state = {
 	'2016': true
 }, action) {
 	switch (action.type) {
 		case SELECT_CHART_YEARS: return action.years;
+		case SELECT_CHART_YEARS_TOGGLE: {
+			let ret = Object.assign({}, state);
+			ret[action.year] = action.selected;
+			return ret;
+		}
 		default: return state;
 	}
 }
@@ -67,7 +72,7 @@ function date(state = {
 		}
     case SELECT_CHART_DATE_DATE: {
 			let ret = Object.assign({}, state);
-			ret.date = action.date; 
+			ret.date = action.date;
 			return ret;
     }
 		default: return state;
@@ -77,7 +82,7 @@ function date(state = {
 const chart = combineReducers({
 	type,
 	lines,
-	year,
+	years,
 	yearRange,
 	solarTerm,
   date
