@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import {
-	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM, SELECT_CHART_SOLARTERM_TOGGLE,
+	SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM, SELECT_CHART_SOLARTERM_TOGGLE, SELECT_CHART_DATE_MONTH, SELECT_CHART_DATE_DATE,
 	FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS,
 	ChartTypes
 } from './actions.js';
@@ -44,8 +44,7 @@ function solarTerm(state = {
 }, action) {
 	switch (action.type) {
 		case SELECT_CHART_SOLARTERM: return action.solarTerm;
-		case SELECT_CHART_SOLARTERM_TOGGLE:
-		{
+		case SELECT_CHART_SOLARTERM_TOGGLE: {
 			let ret = Object.assign({}, state);
 			ret[action.solarTerm] = action.selected;
 			return ret;
@@ -54,12 +53,34 @@ function solarTerm(state = {
 	}
 }
 
+function date(state = {
+  month: 1,
+  date: 1
+}, action) {
+  switch (action.type) {
+		case SELECT_CHART_DATE_MONTH: {
+			let ret = Object.assign({}, state);
+			ret.month = action.month;
+			if (ret.month == 2 && state.date > 29) ret.date = 29;
+			if ([4, 6, 9, 11].includes(ret.month) && state.date > 30) ret.date = 30;
+			return ret;
+		}
+    case SELECT_CHART_DATE_DATE: {
+			let ret = Object.assign({}, state);
+			ret.date = action.date; 
+			return ret;
+    }
+		default: return state;
+  }
+}
+
 const chart = combineReducers({
 	type,
 	lines,
 	year,
 	yearRange,
-	solarTerm
+	solarTerm,
+  date
 });
 
 const data = combineReducers({

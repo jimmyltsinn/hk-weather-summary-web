@@ -4,6 +4,8 @@ export const SELECT_CHART_YEARS = 'SELECT_CHART_YEARS';
 export const SELECT_CHART_YEARRANGE = 'SELECT_CHART_YEARRANGE';
 export const SELECT_CHART_SOLARTERM = 'SELECT_CHART_SOLARTERM';
 export const SELECT_CHART_SOLARTERM_TOGGLE = 'SELECT_CHART_SOLARTERM_TOGGLE';
+export const SELECT_CHART_DATE_MONTH = 'SELECT_CHART_DATE_MONTH';
+export const SELECT_CHART_DATE_DATE = 'SELECT_CHART_DATE_DATE';
 
 export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
@@ -45,6 +47,16 @@ export let toggleSolarTerm = (solarTerm, selected) => ({
   solarTerm,
   selected
 });
+
+export let selectChartDateMonth = month => ({
+	type: SELECT_CHART_DATE_MONTH,
+	month
+});
+
+export let selectChartDateDate = date => ({
+	type: SELECT_CHART_DATE_DATE,
+	date
+}); 
 
 // export let requestData = (yearRange, content) => {
 // 	return {

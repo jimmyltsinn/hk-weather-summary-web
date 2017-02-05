@@ -7,6 +7,8 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import ChartTypeComponent from './ControlBar/ChartTypeComponent';
 import YearRangeComponent from './ControlBar/YearRangeComponent';
 import SolarTermComponent from './ControlBar/SolarTermComponent';
+import YearComponent from './ControlBar/YearComponent';
+import DateComponent from './ControlBar/DateComponent';
 
 const ControlBar = () => {
   const SelectChartType = (
@@ -25,13 +27,27 @@ const ControlBar = () => {
     <ToolbarGroup>
       <SolarTermComponent />
     </ToolbarGroup>
-  )
+  );
+
+  const SelectYear = (
+    <ToolbarGroup>
+      <YearComponent />
+    </ToolbarGroup>
+  );
+
+  const SelectDate = (
+    <ToolbarGroup>
+      <DateComponent />
+    </ToolbarGroup>
+  ); 
 
   return (
     <Toolbar label="Default">
       {SelectChartType}
       {SelectYearRange}
       {SelectSolarTerm}
+      {SelectYear}
+      {SelectDate}
     </Toolbar>
   );
 };

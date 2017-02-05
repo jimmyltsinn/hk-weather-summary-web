@@ -17,6 +17,10 @@
       "1": true,
       "2": false,
       ...
+    },
+    "date": {
+      "month": 1, 
+      "date": 1
     }
 	},
 	"data": {
