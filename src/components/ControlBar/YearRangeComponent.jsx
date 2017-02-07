@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {selectChartYearRange} from '../../redux/actions';
+import {selectChartYearRange} from '../../redux/actions/chart';
 
 import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import {FlatButton} from 'material-ui';
+import {FlatButton as Button} from 'material-ui';
 import Paper from 'material-ui/Paper';
 
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
@@ -15,7 +15,7 @@ import 'react-input-range/lib/css/index.css';
 const style = {
   paper: {
     height: 40,
-    width: 150,
+    width: 400,
     padding: 25,
     overflowX: 'hidden',
     overflowY: 'hidden'
@@ -41,6 +41,7 @@ class YearRangeComponent extends React.Component {
   }
 
   buttonLabel() {
+    // return 'Year Range';
     return `${this.props.values.min} - ${this.props.values.max}`;
   }
 
@@ -48,7 +49,7 @@ class YearRangeComponent extends React.Component {
     return (
       <ToolbarGroup>
         <ToolbarTitle text="Year Range" />
-        <FlatButton
+        <Button
           label={this.buttonLabel()}
           onTouchTap={(event) => {
             event.preventDefault();

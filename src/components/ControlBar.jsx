@@ -10,6 +10,7 @@ import YearRangeComponent from './ControlBar/YearRangeComponent';
 import SolarTermComponent from './ControlBar/SolarTermComponent';
 import YearComponent from './ControlBar/YearComponent';
 import DateComponent from './ControlBar/DateComponent';
+import LineComponent from './ControlBar/LineComponent';
 
 const ControlBar = (props) => {
   const SelectChartType = (
@@ -32,10 +33,15 @@ const ControlBar = (props) => {
     <DateComponent key="selectDate" />
   );
 
+  const SelectLine = (
+    <LineComponent key="selectLine" />
+  );
+
   return (
     <Toolbar>
       <ToolbarGroup>
         {SelectChartType}
+        {SelectLine}
       </ToolbarGroup>
       <ToolbarGroup>
         {props.chartType == 'BY_YEAR' ? [SelectYear] : props.chartType == 'BY_SOLARTERM' ? [SelectYearRange, SelectSolarTerm] : [SelectYearRange, SelectDate]}

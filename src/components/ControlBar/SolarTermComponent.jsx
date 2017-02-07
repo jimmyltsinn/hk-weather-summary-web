@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {toggleSolarTerm} from '../../redux/actions';
+import {toggleSolarTerm} from '../../redux/actions/chart';
 
 import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import {FlatButton, Checkbox} from 'material-ui';
+import {RaisedButton as Button, Checkbox} from 'material-ui';
 import {GridList} from 'material-ui/GridList';
 import {ListItem} from 'material-ui/List';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
@@ -34,19 +34,20 @@ class SolarTermComponent extends React.Component {
   }
 
   buttonLabel() {
-    let checkedList = Object.keys(this.props.checked).filter(i => this.props.checked[i]).map(i => this.props.checked[i] ? this.props.map[i] : '');
-    let buttonLabel = checkedList.slice(0, 3).join(', ');
-    if (checkedList.length > 3) buttonLabel += ' ...';
-    if (buttonLabel == '') buttonLabel = 'Select';
-
-    return buttonLabel;
+    return 'Solar Terms';
+    // let checkedList = Object.keys(this.props.checked).filter(i => this.props.checked[i]).map(i => this.props.checked[i] ? this.props.map[i] : '');
+    // let buttonLabel = checkedList.slice(0, 3).join(', ');
+    // if (checkedList.length > 3) buttonLabel += ' ...';
+    // if (buttonLabel == '') buttonLabel = 'Select';
+    //
+    // return buttonLabel;
   }
 
   render() {
+    // <ToolbarTitle text="Solar Terms" />
     return (
       <ToolbarGroup>
-        <ToolbarTitle text="Solar Terms" />
-        <FlatButton
+        <Button
           label={this.buttonLabel()}
           onTouchTap={(event) => {
             event.preventDefault();

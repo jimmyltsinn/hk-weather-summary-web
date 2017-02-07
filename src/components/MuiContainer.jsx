@@ -1,44 +1,28 @@
 import React from 'react';
 
+import {connect} from 'react-redux';
+import {getTheme} from '../redux/selectors/ui';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {lightBlue500, lightBlue700} from 'material-ui/styles/colors';
+import {lightBlue500, lightBlue700, grey900, grey500} from 'material-ui/styles/colors';
 
 import Main from './Main';
 
-const theme = getMuiTheme({
-  palette: {
-    primary1Color: lightBlue500,
-    primary2Color: lightBlue700,
-    pickerHeaderColor: lightBlue500,
-  },
-  // appBar: {
-  //   height: 50,
-  // },
-});
+const MuiContainer = (props) => (
+  <MuiThemeProvider muiTheme={props.theme}>
+    <Main />
+  </MuiThemeProvider>
+);
 
+MuiContainer.propTypes = {
+  theme: React.PropTypes.object
+};
 
-class MuiContainer extends React.Component {
-  constructor() {
-    super();
-    this.state = {
+const mapStateToProps = (state) => {
+  console.log('mapState of mui-container')
+  return ({
+  theme: getTheme(state)
+});};
 
-    };
-  }
-
-  changeTheme() {
-    this.setState({
-      // theme: getMuiTheme(this.state.theme == getMuiTheme(lightBaseTheme) ? darkBaseTheme : lightBaseTheme)
-    });
-  }
-
-  render() {
-    return (
-      <MuiThemeProvider muiTheme={theme}>
-        <Main />
-      </MuiThemeProvider>
-    );
-  }
-}
-
-export default MuiContainer;
+export default connect(mapStateToProps)(MuiContainer);

@@ -1,15 +1,21 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {ChartTypes, selectChartType} from '../../redux/actions';
+import {ChartTypes, selectChartType} from '../../redux/actions/chart';
 
 import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import {MenuItem, DropDownMenu} from 'material-ui';
 
+const style = {
+  dropDownMenu: {
+    height: '100%'
+  }
+};
+
 const ChartTypeComponent = (props) => (
   <ToolbarGroup>
     <ToolbarTitle text="Chart Type" />
-    <DropDownMenu value={props.chartType} onChange={props.handleChartTypeChange} style={{height: '100%'}}>
+    <DropDownMenu value={props.chartType} onChange={props.handleChartTypeChange} style={style.dropDownMenu}>
       {Object.keys(ChartTypes).map(i => <MenuItem key={i} value={i} primaryText={ChartTypes[i]}/>)}
     </DropDownMenu>
   </ToolbarGroup>

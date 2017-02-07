@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {toggleYear} from '../../redux/actions';
+import {toggleYear} from '../../redux/actions/chart';
 
 import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import {FlatButton, Checkbox} from 'material-ui';

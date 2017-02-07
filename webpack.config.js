@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.jsx',
+  // entry: './src/plot-sample/index-recharts.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
@@ -19,7 +20,8 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['es2015', 'react']
+              presets: ['es2015', 'react'],
+              plugins: ["transform-object-rest-spread"]
             }
           }
         ]

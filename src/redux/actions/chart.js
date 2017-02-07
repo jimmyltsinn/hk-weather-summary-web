@@ -7,15 +7,17 @@ export const SELECT_CHART_SOLARTERM_TOGGLE = 'SELECT_CHART_SOLARTERM_TOGGLE';
 export const SELECT_CHART_DATE_MONTH = 'SELECT_CHART_DATE_MONTH';
 export const SELECT_CHART_DATE_DATE = 'SELECT_CHART_DATE_DATE';
 export const SELECT_CHART_YEARS_TOGGLE = 'SELECT_CHART_YEARS_TOGGLE';
-
-export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
-export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
-export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const SELECT_CHART_LINES_TOGGLE = 'SELECT_CHART_LINES_TOGGLE';
 
 export const ChartTypes = {
 	BY_SOLARTERM: 'By Solar Term',
 	BY_DATE: 'By Date',
   BY_YEAR: 'By Year'
+};
+
+export const LineOptions = {
+  TEMP_AVG: 'Average Temp',
+  MOVING_AVG: 'Moving Average Temp'
 };
 
 export let selectChartType = chartType => ({
@@ -65,24 +67,8 @@ export let toggleYear = (year, selected) => ({
 	selected
 });
 
-// export let requestData = (yearRange, content) => {
-// 	return {
-// 		type: FETCH_DATA_REQUEST,
-// 		yearRange,
-// 		content
-// 	};
-// };
-//
-// export let fetchFailed = (err) => {
-// 	return {
-// 		type: FETCH_DATA_FAILURE,
-// 		error: err
-// 	};
-// };
-//
-// export let fetchComplete = (data) => {
-// 	return {
-// 		type: FETCH_DATA_SUCCESS,
-// 		data
-// 	};
-// };
+export let toggleLine = (line, selected) => ({
+	type: SELECT_CHART_LINES_TOGGLE,
+	line,
+	selected
+});
