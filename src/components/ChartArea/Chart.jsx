@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {} from '../../redux/actions/chart'
+import {} from '../../redux/actions/chart';
+import {getContentWidth, getContentHeight} from '../../redux/selectors/ui';
 
 import xhr from 'xhr';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
@@ -45,7 +46,7 @@ class Chart extends React.Component {
   render() {
     if (!this.state.data) return <CircularProgress />;
     else return (
-      <LineChart width={1200} height={300} data={this.state.data}
+      <LineChart width={this.props.width} height={this.props.height} data={this.state.data}
               margin={{top: 5, right: 30, left: 20, bottom: 5}}>
          <XAxis dataKey="date" type="number" domain={[1900, 2016]} />
          <YAxis domain={[5, 35]}/>
@@ -59,9 +60,13 @@ class Chart extends React.Component {
 }
 
 Chart.propTypes = {
+  width: React.PropTypes.number.isRequired,
+  height: React.PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  width: getContentWidth(state),
+  height: getContentHeight(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

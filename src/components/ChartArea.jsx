@@ -20,7 +20,6 @@ class ChartArea extends React.Component {
 		return (
 			<Paper
 				style={style}
-				height={"100vh"}
 				zDepth={0}>
         <Chart />
 			</Paper>

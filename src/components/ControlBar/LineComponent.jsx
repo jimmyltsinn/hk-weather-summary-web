@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {LineOptions, toggleLine} from '../../redux/actions/chart'
+import {LineOptions, toggleLine} from '../../redux/actions/chart'; 
 
 import {RaisedButton as Button, Checkbox} from 'material-ui';
 import List, {ListItem} from 'material-ui/List';

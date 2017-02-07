@@ -20,7 +20,7 @@ MuiContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log('mapState of mui-container')
+  console.log('mapState of mui-container');
   return ({
   theme: getTheme(state)
 });};
