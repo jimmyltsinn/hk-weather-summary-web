@@ -32,7 +32,7 @@ gulp.task('webpack-dev-server', (cb) => {
 });
 
 gulp.task('lint', () => {
-  return gulp.src(['src/**/*.js', 'src/**/*.jsx'])
+  return gulp.src(['src/**/*.js', 'src/**/*.jsx', '!src/plot-sample/**.jsx'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());

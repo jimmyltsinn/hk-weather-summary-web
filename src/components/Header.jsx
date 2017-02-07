@@ -1,14 +1,20 @@
 import React from 'react';
 
-import {connect} from 'react-redux';
+import { AppBar } from 'material-ui';
+import IconButton from 'material-ui/IconButton';
 
-import { AppBar, FlatButton } from 'material-ui';
+import 'react-input-range/lib/css/index.css';
 
 const Header = () => (
 	<AppBar
 		title="HK Weather Summary"
 		iconElementLeft={<div></div>}
-		iconElementRight={<FlatButton label="Change Theme" onTouchTap={() => alert('haha')} disabled={true} />} />
+		iconElementRight={<IconButton
+			iconClassName="fa fa-github"
+			tooltip="Github Repository"
+			href="//www.github.com/jimmyltsinn/hk-weather-summary-web" />}
+
+		/>
 );
 
 export default Header;

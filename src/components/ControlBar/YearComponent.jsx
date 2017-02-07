@@ -53,7 +53,8 @@ class Component extends React.Component {
               {_.range(1900, 2016, pageStep).map(i => (
                 <ListItem
                   key={i}
-                  primaryText={i}
+                  primaryText={i + ' -'}
+                  style={{fontWeight: ((_.range(i, i + pageStep).filter(i => this.props.checked[i])).length > 0 ? 'bold' : 'normal')}}
                   rightIcon={<ChevronRight />}
                   onTouchTap={(event) => {
                     event.preventDefault();

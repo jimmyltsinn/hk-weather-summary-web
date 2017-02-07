@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 import {getTheme} from '../redux/selectors/ui';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {lightBlue500, lightBlue700, grey900, grey500} from 'material-ui/styles/colors';
 
 import Main from './Main';
 
@@ -22,7 +20,8 @@ MuiContainer.propTypes = {
 const mapStateToProps = (state) => {
   console.log('mapState of mui-container');
   return ({
-  theme: getTheme(state)
-});};
+    theme: getTheme(state)
+  });
+};
 
 export default connect(mapStateToProps)(MuiContainer);

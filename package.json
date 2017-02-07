@@ -38,5 +38,8 @@
     "unorm": "^1.4.1",
     "webpack": "^2.2.1",
     "xhr": "^2.3.3"
+  },
+  "scripts": {
+    "build": "gulp webpack"
   }
 }

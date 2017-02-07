@@ -2,7 +2,8 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
+// import {ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import ChartTypeComponent from './ControlBar/ChartTypeComponent';
@@ -58,7 +59,10 @@ const mapStateToProps = (state) => ({
   chartType: state.chart.type
 });
 
-const mapDispatchToProps = (dispatch) => ({
-});
+// const mapDispatchToProps = (dispatch) => ({
+// });
 
-export default muiThemeable()(connect(mapStateToProps, mapDispatchToProps)(ControlBar));
+export default muiThemeable()(connect(
+  mapStateToProps
+  // mapDispatchToProps
+)(ControlBar));

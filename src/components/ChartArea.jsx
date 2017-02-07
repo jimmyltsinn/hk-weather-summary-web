@@ -7,30 +7,35 @@ import Paper from 'material-ui/Paper';
 import Chart from './ChartArea/Chart';
 
 const style = {
-	textAlign: 'center',
+  textAlign: 'center',
 };
 
 class ChartArea extends React.Component {
-	constructor() {
-		super();
-		this.style = style;
-	}
+  constructor() {
+    super();
+    this.style = style;
+  }
 
-	render() {
-		return (
-			<Paper
-				style={style}
-				zDepth={0}>
+  render() {
+    return (
+      <Paper
+        style={style}
+        zDepth={0}>
         <Chart />
-			</Paper>
-		);
-	}
+      </Paper>
+    );
+  }
 }
 
-const mapStateToProps = (state) => ({
-});
+// const mapStateToProps = (state) => ({
+//   state
+// });
+//
+// const mapDispatchToProps = (dispatch) => ({
+//   dispatch
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChartArea);
+export default connect(
+  // mapStateToProps,
+  // mapDispatchToProps
+)(ChartArea);

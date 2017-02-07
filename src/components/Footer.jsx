@@ -6,12 +6,13 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 
 const Footer = (props) => (
 	<Paper zDepth={2} style={props.muiTheme.footer}>
-		<div>This site is built with React, Redux with material-ui. </div>
+		<div>A page built with React, Redux and material-ui. </div>
+    <div>All data are retrieved from Hong Kong Observatory. Umm ... I am not sure about the copyright issue. lol </div>
 	</Paper>
 );
 
 Footer.propTypes = {
-	muiTheme: React.PropTypes.object
+  muiTheme: React.PropTypes.object
 };
 
 export default muiThemeable()(Footer);

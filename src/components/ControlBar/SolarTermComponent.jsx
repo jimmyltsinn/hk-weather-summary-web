@@ -3,7 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {toggleSolarTerm} from '../../redux/actions/chart';
 
-import {ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+import {ToolbarGroup} from 'material-ui/Toolbar';
+// import {ToolbarTitle} from 'material-ui/Toolbar';
 import {RaisedButton as Button, Checkbox} from 'material-ui';
 import {GridList} from 'material-ui/GridList';
 import {ListItem} from 'material-ui/List';

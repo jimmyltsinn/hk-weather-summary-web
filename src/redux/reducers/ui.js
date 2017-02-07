@@ -10,11 +10,11 @@ function theme(state = getMuiTheme({
     primary1Color: lightBlue500,
     primary2Color: lightBlue700,
     pickerHeaderColor: lightBlue500
-	}}), action) {
-	switch (action.type) {
-		case SELECT_UI_THEME: return action.theme;
-		default: return state;
-	}
+  }}), action) {
+  switch (action.type) {
+    case SELECT_UI_THEME: return action.theme;
+    default: return state;
+  }
 }
 
 function window(state = {width: 0, height: 0}, action) {
@@ -25,7 +25,7 @@ function window(state = {width: 0, height: 0}, action) {
 }
 
 const ui = combineReducers({
-	theme,
+  theme,
   window
 });
 

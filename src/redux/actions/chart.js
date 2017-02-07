@@ -10,8 +10,8 @@ export const SELECT_CHART_YEARS_TOGGLE = 'SELECT_CHART_YEARS_TOGGLE';
 export const SELECT_CHART_LINES_TOGGLE = 'SELECT_CHART_LINES_TOGGLE';
 
 export const ChartTypes = {
-	BY_SOLARTERM: 'By Solar Term',
-	BY_DATE: 'By Date',
+  BY_SOLARTERM: 'By Solar Term',
+  BY_DATE: 'By Date',
   BY_YEAR: 'By Year'
 };
 
@@ -21,28 +21,28 @@ export const LineOptions = {
 };
 
 export let selectChartType = chartType => ({
-	type: SELECT_CHART_TYPE,
-	chartType
+  type: SELECT_CHART_TYPE,
+  chartType
 });
 
 export let selectChartLines = lines => ({
-	type: SELECT_CHART_LINES,
-	lines
+  type: SELECT_CHART_LINES,
+  lines
 });
 
 export let selectChartYears = years => ({
-	type: SELECT_CHART_YEARS,
-	years
+  type: SELECT_CHART_YEARS,
+  years
 });
 
 export let selectChartYearRange = (range) => ({
-	type: SELECT_CHART_YEARRANGE,
-	yearRange: range
+  type: SELECT_CHART_YEARRANGE,
+  yearRange: range
 });
 
 export let selectChartSolarTerm = solarTerm => ({
-	type: SELECT_CHART_SOLARTERM,
-	solarTerm
+  type: SELECT_CHART_SOLARTERM,
+  solarTerm
 });
 
 export let toggleSolarTerm = (solarTerm, selected) => ({
@@ -52,23 +52,23 @@ export let toggleSolarTerm = (solarTerm, selected) => ({
 });
 
 export let selectChartDateMonth = month => ({
-	type: SELECT_CHART_DATE_MONTH,
-	month
+  type: SELECT_CHART_DATE_MONTH,
+  month
 });
 
 export let selectChartDateDate = date => ({
-	type: SELECT_CHART_DATE_DATE,
-	date
+  type: SELECT_CHART_DATE_DATE,
+  date
 });
 
 export let toggleYear = (year, selected) => ({
-	type: SELECT_CHART_YEARS_TOGGLE,
-	year,
-	selected
+  type: SELECT_CHART_YEARS_TOGGLE,
+  year,
+  selected
 });
 
 export let toggleLine = (line, selected) => ({
-	type: SELECT_CHART_LINES_TOGGLE,
-	line,
-	selected
+  type: SELECT_CHART_LINES_TOGGLE,
+  line,
+  selected
 });
