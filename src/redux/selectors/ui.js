@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 import {grey900, grey500} from 'material-ui/styles/colors';
 
 export const getTheme = createSelector(state => state.ui.theme, theme => {
-  console.log("[Selector] getTheme");
   return Object.assign({}, theme, {
     footer: Object.assign({}, theme.toolbar, {
       background: grey900,

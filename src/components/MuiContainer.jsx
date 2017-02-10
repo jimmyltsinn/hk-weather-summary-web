@@ -17,11 +17,8 @@ MuiContainer.propTypes = {
   theme: React.PropTypes.object
 };
 
-const mapStateToProps = (state) => {
-  console.log('mapState of mui-container');
-  return ({
-    theme: getTheme(state)
-  });
-};
+const mapStateToProps = (state) => ({
+  theme: getTheme(state)
+});
 
 export default connect(mapStateToProps)(MuiContainer);

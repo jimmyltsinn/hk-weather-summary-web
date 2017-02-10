@@ -38,6 +38,8 @@ class Chart extends React.Component {
 
         return raw[i];
       });
+
+      // setTimeout(() => this.setState({data: data}), 3000);
       this.setState({data: data});
     });
   }

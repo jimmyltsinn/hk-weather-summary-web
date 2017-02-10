@@ -9,11 +9,7 @@ export const SELECT_CHART_DATE_DATE = 'SELECT_CHART_DATE_DATE';
 export const SELECT_CHART_YEARS_TOGGLE = 'SELECT_CHART_YEARS_TOGGLE';
 export const SELECT_CHART_LINES_TOGGLE = 'SELECT_CHART_LINES_TOGGLE';
 
-export const ChartTypes = {
-  BY_SOLARTERM: 'By Solar Term',
-  BY_DATE: 'By Date',
-  BY_YEAR: 'By Year'
-};
+export {DataTypes as ChartTypes} from './data';
 
 export const LineOptions = {
   TEMP_AVG: 'Average Temp',
