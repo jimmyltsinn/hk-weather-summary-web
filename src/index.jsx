@@ -1,29 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import {createStore, applyMiddleware} from 'redux';
-import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-
-import reducer from './redux/reducers';
 import MuiContainer from './components/MuiContainer';
 
-import init from './init';
+import configureStore from './redux/configureStore';
 
-let store = createStore(
-  reducer,
-  applyMiddleware(
-    thunkMiddleware,
-    createLogger()
-  )
-);
-
-init(store);
+let store = configureStore();
 
 injectTapEventPlugin();
-
 
 ReactDOM.render(
   <Provider store={store}>

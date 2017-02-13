@@ -6,7 +6,8 @@ import {
   // ChartTypes
 } from '../actions/chart';
 
-function type(state = 'BY_SOLARTERM', action) {
+// function type(state = 'BY_SOLARTERM', action) {
+function type(state = 'BY_YEAR', action) {
   switch (action.type) {
     case SELECT_CHART_TYPE: return action.chartType;
     default: return state;

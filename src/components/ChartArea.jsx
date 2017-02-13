@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
+import {fetchDataNeeded} from '../redux/actions/data';
 
 import Paper from 'material-ui/Paper';
 
@@ -16,6 +17,15 @@ class ChartArea extends React.Component {
     this.style = style;
   }
 
+  componentWillMount() {
+    this.props.dispatch(fetchDataNeeded());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.state.chart !== nextProps.state.chart)
+      this.props.dispatch(fetchDataNeeded());
+  }
+
   render() {
     return (
       <Paper
@@ -27,15 +37,20 @@ class ChartArea extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   state
-// });
+ChartArea.propTypes = {
+  state: React.PropTypes.object,
+  dispatch: React.PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  state
+});
 //
 // const mapDispatchToProps = (dispatch) => ({
 //   dispatch
 // });
 
 export default connect(
-  // mapStateToProps,
+  mapStateToProps
   // mapDispatchToProps
 )(ChartArea);
