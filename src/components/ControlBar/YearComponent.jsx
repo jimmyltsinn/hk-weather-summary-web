@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 
 import {connect} from 'react-redux';
@@ -10,13 +9,16 @@ import List, {ListItem} from 'material-ui/List';
 import Popover, {PopoverAnimationVertical, PopoverAnimationHorizontal} from 'material-ui/Popover';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
+import {range} from '../../util';
+
+// Range generate (Inclusive)
 const pageStep = 12;
 
 class Component extends React.Component {
   constructor() {
     super();
     let state = {};
-    _.range(1900, 2017, pageStep).map(i => state[i] = {});
+    range(1900, 2016, pageStep).map(i => state[i] = {});
     this.state = state;
   }
 
@@ -50,11 +52,11 @@ class Component extends React.Component {
             onRequestClose={() => this.setState({open: false})}
             animation={PopoverAnimationVertical}>
             <List>
-              {_.range(1900, 2016, pageStep).map(i => (
+              {range(1900, 2016, pageStep).map(i => (
                 <ListItem
                   key={i}
                   primaryText={i + ' -'}
-                  style={{fontWeight: ((_.range(i, i + pageStep).filter(i => this.props.checked[i])).length > 0 ? 'bold' : 'normal')}}
+                  style={{fontWeight: ((range(i, i + pageStep - 1).filter(i => this.props.checked[i])).length > 0 ? 'bold' : 'normal')}}
                   rightIcon={<ChevronRight />}
                   onTouchTap={(event) => {
                     event.preventDefault();
@@ -70,7 +72,7 @@ class Component extends React.Component {
             </List>
           </Popover>
           {/* 2nd level menu */}
-          {_.range(1900, 2017, pageStep).map(i => (
+          {range(1900, 2016, pageStep).map(i => (
             <Popover
               key={i}
               open={this.state[i].open ? true : false}
@@ -86,7 +88,7 @@ class Component extends React.Component {
               }}
               animation={PopoverAnimationHorizontal}>
               <List>
-                {_.range(i, i + pageStep).map(i => i <= 2016 ? (
+                {range(i, i + pageStep - 1).map(i => i <= 2016 ? (
                   <ListItem key={i} primaryText={i} leftCheckbox={
                       <Checkbox
                         checked={this.props.checked[i] ? true : false}
