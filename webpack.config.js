@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
   entry: './src/index.jsx',
   // entry: './src/plot-sample/index-recharts.jsx',
@@ -35,26 +37,40 @@ module.exports = {
       }
     ]
   },
+  // externals: {
+  //   'react': 'react',
+  //   'react-dom' : 'reactDOM'
+  // },
   resolve: {
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({
-    //     compress: {
-    //         warnings: false,
-    //     },
-    //     output: {
-    //         comments: false,
-    //     },
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        unused: true,
+        dead_code: true,
+        warnings: false,
+        drop_debugger: true,
+        conditionals: true,
+        evaluate: true,
+        drop_console: true,
+        sequences: true,
+        booleans: true,
+      },
+      output: {
+        comments: false,
+      },
+    }),
     new HtmlWebpackPlugin({
       title: 'HK Weather Summary',
       template: './src/index.ejs'
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        // NODE_ENV: JSON.stringify('production')
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
+    // new BundleAnalyzerPlugin()
   ],
+  devtool: 'cheap-module-source-map',
 };

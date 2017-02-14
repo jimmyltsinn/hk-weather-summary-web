@@ -13,8 +13,8 @@ const configureStore = () => {
   let store = createStore(
     reducer,
     applyMiddleware(
-      thunkMiddleware,
-      createLogger()
+      thunkMiddleware
+      // createLogger()
     )
   );
 
