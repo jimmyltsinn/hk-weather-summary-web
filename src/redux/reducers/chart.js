@@ -7,7 +7,7 @@ import {
 } from '../actions/chart';
 
 // function type(state = 'BY_SOLARTERM', action) {
-function type(state = 'BY_SOLARTERM', action) {
+function type(state = 'BY_YEAR', action) {
   switch (action.type) {
     case SELECT_CHART_TYPE: return action.chartType;
     default: return state;
@@ -15,7 +15,7 @@ function type(state = 'BY_SOLARTERM', action) {
 }
 
 function lines(state = {
-  'temp_avg': true,
+  'TEMP_AVG_RAW': true,
 }, action) {
   switch (action.type) {
     case SELECT_CHART_LINES: return action.lines;

@@ -11,14 +11,86 @@ export const SELECT_CHART_LINES_TOGGLE = 'SELECT_CHART_LINES_TOGGLE';
 
 export {DataTypes as ChartTypes} from './data';
 
-export const LineType = {
-  TEMP_AVG_RAW: 'Average Temperature'
+import {dateOfMonth} from '../../util';
+
+export const LineTypes = {
+  TEMP_AVG_RAW: {
+    name: 'Average Temperature',
+    shortName: 'Avg.Temp',
+    keyName: 'temp_mean',
+    id: 'raw',
+    color: {
+      s: 75,
+      v: 75
+    }
+  },
+  TEMP_AVG_MIN: {
+    name: 'Min Temperature',
+    shortName: 'Min.Temp',
+    keyName: 'temp_min',
+    id: 'min',
+    color: {
+      s: 75,
+      v: 85
+    }
+  },
+  TEMP_AVG_MAX: {
+    name: 'Max Temperature',
+    shortName: 'Max.Temp',
+    keyName: 'temp_max',
+    id: 'max',
+    color: {
+      s: 75,
+      v: 85
+    }
+  },
+  MOVING_AVG: {
+    name: 'Moving Average (\\pm 5)',
+    shortName: 'MovAvg',
+    id: 'movavg',
+    color: {
+      s: 75,
+      v: 40
+    },
+    transform: {
+      years: (range, month, date, year, arr) => {
+        let ret = 0, w = 0;
+        for (let k = -range; k <= range; ++k) {
+          let p = parseInt(month), q = parseInt(date) + k;
+          if (q > dateOfMonth(p, year)) {
+            q -= dateOfMonth(p, year);
+            p++;
+          }
+          if (q <= 0) {
+            p -= 1;
+            q += dateOfMonth(p, year) + 1;
+          }
+          if (arr[p] && arr[p][q]) {
+            ret += arr[p][q].temp_mean;
+            w++;
+          }
+        }
+        return ret / w;
+      },
+      solarTerm: (range, year, arr) => {
+        let ret = 0, w = 0;
+        for (let k = -range; k <= range; ++k) {
+          let m = parseInt(year) + k;
+          if (arr[m]) {
+            ret += arr[m].temp_mean;
+            w++;
+          }
+        }
+        return ret / w;
+      }
+    }
+  }
 };
 
-export const LineOptions = {
-  TEMP_AVG: 'Average Temp',
-  MOVING_AVG: 'Moving Average Temp'
-};
+// export const LineOptions = {
+//   TEMP_AVG: 'Average Temp',
+//   MOVING_AVG: 'Moving Average Temp'
+// };
 
 export let selectChartType = chartType => ({
   type: SELECT_CHART_TYPE,

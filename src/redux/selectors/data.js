@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import {range, round} from '../../util';
+import {LineTypes} from '../actions/chart';
 
 export const getYearsData = createSelector(state => state.data.years, state => state.chart, (data, chartOptions) => {
   let map = {};
@@ -25,7 +26,14 @@ export const getYearsData = createSelector(state => state.data.years, state => s
             'date': `${month}/${date}`
           };
 
-          ret[map[month][date]][`${year}-RAW`] = data[year][month][date].temp_mean;
+          Object.keys(chartOptions.lines)
+            .filter(line => chartOptions.lines[line])
+            .map(line => {
+              if (LineTypes[line].keyName) {
+                ret[map[month][date]][`${year}-${LineTypes[line].id}`] = data[year][month][date][LineTypes[line].keyName];
+              } else {
+                ret[map[month][date]][`${year}-${LineTypes[line].id}`] = round(LineTypes[line].transform.years(5, month, date, year, data[year]), 2);
+              }});
         })));
 
   return ret;
@@ -38,7 +46,15 @@ export const getSolarTermData = createSelector(state => state.data.solarTerm, st
     .map(term => Object.keys(data[term])
       .filter(year => year >= chartOptions.yearRange.min && year <= chartOptions.yearRange.max)
       .map(year => {
-        ret[year - chartOptions.yearRange.min][`${term}-RAW`] = data[term][year].temp_mean;
+        Object.keys(chartOptions.lines)
+        .filter(line => chartOptions.lines[line])
+        .map(line => {
+          if (LineTypes[line].keyName) {
+            ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`] = data[term][year][LineTypes[line].keyName];
+          } else {
+            ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`] = round(LineTypes[line].transform.solarTerm(5, year, data[term]), 2);
+          }
+        });
       })
   );
 

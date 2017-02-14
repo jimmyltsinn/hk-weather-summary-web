@@ -1,13 +1,14 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {} from '../../redux/actions/chart';
+import {LineTypes} from '../../redux/actions/chart';
 import {getContentWidth, getContentHeight} from '../../redux/selectors/ui';
 import {getYearsData, getSolarTermData} from '../../redux/selectors/data';
 
 import Color from 'color';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend} from 'recharts';
-// CartesianGrid,
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid} from 'recharts';
+
+import {range} from '../../util';
 
 class Chart extends React.Component {
   render() {
@@ -24,34 +25,42 @@ class Chart extends React.Component {
       case 'BY_SOLARTERM': {
         lines = Object.keys(this.props.chartOptions.solarTerm)
           .filter(term => this.props.chartOptions.solarTerm[term])
-          .map(term => ({
-            key: `${term}-RAW`,
-            name: this.props.solarTermName[term],
-            color: Color.hsl([term / 24 * -360 + 180, 75, 40]).string(),
-          }));
+          .map(term => Object.keys(this.props.chartOptions.lines)
+            .filter(i => this.props.chartOptions.lines[i])
+            .map(line => ({
+              key: `${term}-${LineTypes[line].id}`,
+              name: `${this.props.solarTermName[term]} (${LineTypes[line].shortName})`,
+              color: Color.hsl([term / 24 * -360 + 180, LineTypes[line].color.s, LineTypes[line].color.v]).string(),
+            })));
+        lines = [].concat.apply([], lines);
         xAxis = [{
           type: 'number',
           key: 'year',
-          range: this.props.xRange
+          range: this.props.xRange,
+          ticks: range(this.props.xRange[0], this.props.xRange[1], 5)
         }];
         break;
       }
       case 'BY_YEAR': {
         lines = Object.keys(this.props.chartOptions.years)
           .filter(i => this.props.chartOptions.years[i])
-          .map(i => ({
-            key: `${i}-RAW`,
-            color: Color.hsl([(i - 1900) / (2016 - 1900) * -240 + 240, 75, 40]).string(),
-            name: `${i}`
-          }));
+          .map(i => Object.keys(this.props.chartOptions.lines)
+            .filter(i => this.props.chartOptions.lines[i])
+            .map(line => ({
+              key: `${i}-${LineTypes[line].id}`,
+              color: Color.hsl([(i - 1900) / (2016 - 1900) * -240 + 240, LineTypes[line].color.s, LineTypes[line].color.v]).string(),
+              name: `${i} (${LineTypes[line].shortName})`
+            })));
+        lines = [].concat.apply([], lines);
         xAxis = [{
           type: 'category',
           key: 'date',
-          range: []
+          range: [],
+          ticks: range(1, 12).map(i => `${i}/1`)
         }, {
           type: 'number',
           key: 'number',
-          range: [1, 366]
+          range: [1, 366],
         }];
         break;
       }
@@ -73,11 +82,17 @@ class Chart extends React.Component {
             xAxisId={id}
             key={axis.key}
             domain={axis.range}
+            ticks={axis.ticks || null}
             />
         ))}
-        <YAxis domain={[0, 40]}/>
+        <YAxis
+          domain={[0, 40]}
+          ticks={range(0, 40, 2)}
+          />
         <Tooltip/>
         <Legend />
+        <CartesianGrid strokeDasharray="2 2"/>
+
         {lines.map(l => (
           <Line
             key={l.key}
@@ -90,7 +105,6 @@ class Chart extends React.Component {
           />))}
       </LineChart>
     );
-    // <CartesianGrid strokeDasharray="30 5"/>
   }
 }
 

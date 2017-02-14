@@ -24,7 +24,7 @@ const style = {
 
 const yearRange = {
   max: 2016,
-  min: 1900
+  min: 1901
 };
 
 class YearRangeComponent extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {LineOptions, toggleLine} from '../../redux/actions/chart';
+import {LineTypes, toggleLine} from '../../redux/actions/chart';
 
 import {RaisedButton as Button, Checkbox} from 'material-ui';
 import List, {ListItem} from 'material-ui/List';
@@ -40,8 +40,8 @@ class LineComponent extends React.Component {
               onRequestClose={() => this.setState({open: false})}
               animation={PopoverAnimationVertical}>
               <List>
-                {Object.keys(LineOptions).map(id => (
-                  <ListItem key={id} primaryText={LineOptions[id]} leftCheckbox={
+                {Object.keys(LineTypes).map(id => (
+                  <ListItem key={id} primaryText={LineTypes[id].name} leftCheckbox={
                       <Checkbox
                         checked={this.props.checked[id] ? true : false}
                         onCheck={(element, checked) => this.props.toggleLine(id, checked)}
