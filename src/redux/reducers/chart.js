@@ -7,7 +7,7 @@ import {
 } from '../actions/chart';
 
 // function type(state = 'BY_SOLARTERM', action) {
-function type(state = 'BY_YEAR', action) {
+function type(state = 'BY_SOLARTERM', action) {
   switch (action.type) {
     case SELECT_CHART_TYPE: return action.chartType;
     default: return state;
@@ -42,7 +42,7 @@ function years(state = {
   }
 }
 
-function yearRange(state = {min: 1900, max: 2016}, action) {
+function yearRange(state = {min: 1901, max: 2016}, action) {
   switch (action.type) {
     case SELECT_CHART_YEARRANGE: return action.yearRange;
     default: return state;

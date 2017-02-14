@@ -11,6 +11,10 @@ export const SELECT_CHART_LINES_TOGGLE = 'SELECT_CHART_LINES_TOGGLE';
 
 export {DataTypes as ChartTypes} from './data';
 
+export const LineType = {
+  TEMP_AVG_RAW: 'Average Temperature'
+};
+
 export const LineOptions = {
   TEMP_AVG: 'Average Temp',
   MOVING_AVG: 'Moving Average Temp'

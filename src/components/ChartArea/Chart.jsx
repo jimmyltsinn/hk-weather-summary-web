@@ -3,77 +3,89 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {} from '../../redux/actions/chart';
 import {getContentWidth, getContentHeight} from '../../redux/selectors/ui';
+import {getYearsData, getSolarTermData} from '../../redux/selectors/data';
 
-import xhr from 'xhr';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import CircularProgress from 'material-ui/CircularProgress';
-
-import Config from '../../config.js';
+import Color from 'color';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, } from 'recharts';
+// CartesianGrid,
 
 class Chart extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-
-    // TODO will move this to redux later
-    let url = Config.serverAddress + '/weather/solar-term/19';
-    xhr(url, (err, res, body) => {
-      let raw = JSON.parse(body);
-
-      let data = [];
-      data = Object.keys(raw).map(i => {
-        raw[i].date = parseInt(i);
-
-        let cnt = 0;
-        raw[i].movingAvg = 0;
-        for (let j = -5; j <= 5; ++j) {
-          let id = parseInt(i) + j;
-          if (id < 0 && id >= raw.length) continue;
-          if (!raw[id]) continue;
-          raw[i].movingAvg += raw[id].temp_mean;
-
-          cnt++;
-        }
-        raw[i].movingAvg /= cnt;
-
-        return raw[i];
-      });
-
-      // setTimeout(() => this.setState({data: data}), 3000);
-      this.setState({data: data});
-    });
-  }
-
-
   render() {
-    if (!this.state.data) return <CircularProgress />;
-    else return (
-      <LineChart width={this.props.width} height={this.props.height} data={this.state.data}
-              margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-         <XAxis dataKey="date" type="number" domain={[1900, 2016]} />
-         <YAxis domain={[5, 35]}/>
-         <CartesianGrid strokeDasharray="30 5"/>
-         <Tooltip/>
-         <Legend />
-           <Line type="monotone" dataKey="movingAvg" stroke="#FF0000" dot={false} />
+    const margin = {
+      top: 5,
+      right: 30,
+      left: 20,
+      bottom: 5
+    };
+
+    let lines, keyName;
+
+    switch (this.props.chartOptions.type) {
+      case 'BY_SOLARTERM': {
+        lines = Object.keys(this.props.chartOptions.solarTerm)
+          .filter(term => this.props.chartOptions.solarTerm[term])
+          .map(term => ({
+            key: `${term}-RAW`,
+            name: this.props.solarTermName[term],
+            color: Color.hsl([term / 24 * -360 + 180, 75, 40]).string(),
+          }));
+        keyName = 'year';
+        break;
+      }
+      case 'BY_YEAR': {
+        lines = Object.keys(this.props.chartOptions.years)
+          .filter(i => this.props.chartOptions.years[i])
+          .map(i => ({
+            key: `${i}-RAW`,
+            color: Color.hsl([(i - 1900) / (2016 - 1900) * -240 + 240, 75, 40]).string(),
+            name: `${i}`
+          }));
+        keyName = 'id';
+        break;
+      }
+    }
+
+    return (
+      <LineChart
+        width={this.props.width}
+        height={this.props.height}
+        data={this.props.data}
+        margin={margin}>
+        <XAxis
+          type="number"
+          dataKey={keyName}
+          domain={this.props.xRange}
+          />
+        <YAxis domain={[0, 40]}/>
+        <Tooltip/>
+        <Legend />
+        {lines.map(l => <Line key={l.key} type="monotone" dataKey={l.key} name={l.name} stroke={l.color} dot={false} />)}
       </LineChart>
     );
+    // <CartesianGrid strokeDasharray="30 5"/>
   }
 }
 
 Chart.propTypes = {
   width: React.PropTypes.number.isRequired,
-  height: React.PropTypes.number.isRequired
+  height: React.PropTypes.number.isRequired,
+  chartOptions: React.PropTypes.object.isRequired,
+  xRange: React.PropTypes.array.isRequired,
+  data: React.PropTypes.array.isRequired,
+  solarTermName: React.PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   width: getContentWidth(state),
-  height: getContentHeight(state)
+  height: getContentHeight(state),
+  chartOptions: state.chart,
+  xRange: state.chart.type == 'BY_YEAR' ? [1, 366] : [state.chart.yearRange.min, state.chart.yearRange.max],
+  data: state.chart.type == 'BY_YEAR' ? getYearsData(state) : state.chart.type == 'BY_SOLARTERM' ? getSolarTermData(state) : state.data.date[state.chart.date.month][state.chart.date.date],
+  solarTermName: state.data.solarTerm.map
 });
 
 // const mapDispatchToProps = (dispatch) => ({
 // });
-
 
 export default connect(
   mapStateToProps

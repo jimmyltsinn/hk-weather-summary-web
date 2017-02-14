@@ -11,7 +11,7 @@ const Header = () => (
 		iconElementLeft={<div></div>}
 		iconElementRight={<IconButton
 			iconClassName="fa fa-github"
-			tooltip="Github Repository"
+			tooltip="Fork me at Github"
 			href="//www.github.com/jimmyltsinn/hk-weather-summary-web" />}
 
 		/>

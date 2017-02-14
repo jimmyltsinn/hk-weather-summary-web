@@ -11,14 +11,13 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
 import {range} from '../../util';
 
-// Range generate (Inclusive)
 const pageStep = 12;
 
 class Component extends React.Component {
   constructor() {
     super();
     let state = {};
-    range(1900, 2016, pageStep).map(i => state[i] = {});
+    range(1886, 2016, pageStep).map(i => state[i] = {});
     this.state = state;
   }
 
@@ -52,7 +51,7 @@ class Component extends React.Component {
             onRequestClose={() => this.setState({open: false})}
             animation={PopoverAnimationVertical}>
             <List>
-              {range(1900, 2016, pageStep).map(i => (
+              {range(1886, 2016, pageStep).map(i => (
                 <ListItem
                   key={i}
                   primaryText={i + ' -'}
@@ -72,7 +71,7 @@ class Component extends React.Component {
             </List>
           </Popover>
           {/* 2nd level menu */}
-          {range(1900, 2016, pageStep).map(i => (
+          {range(1886, 2016, pageStep).map(i => (
             <Popover
               key={i}
               open={this.state[i].open ? true : false}
@@ -88,7 +87,7 @@ class Component extends React.Component {
               }}
               animation={PopoverAnimationHorizontal}>
               <List>
-                {range(i, i + pageStep - 1).map(i => i <= 2016 ? (
+                {range(i, i + pageStep - 1).filter(i => i < 1940 || i > 1946).map(i => i <= 2016 ? (
                   <ListItem key={i} primaryText={i} leftCheckbox={
                       <Checkbox
                         checked={this.props.checked[i] ? true : false}

@@ -9,8 +9,6 @@ import {range} from '../../util';
 
 let zeroPaddingStr = (num, len) => ((new Array(len).join('0') + num).slice(-len));
 
-// Range generate (Inclusive)
-
 class YearComponent extends React.Component {
   constructor() {
     super();

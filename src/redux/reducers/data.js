@@ -39,7 +39,7 @@ function date(state = {}, action) {
 }
 
 function status(state = {
-  isFetching: false
+  isFetching: true
 }, action) {
   switch (action.type) {
     case START_FETCH: return { isFetching: true };
