@@ -16,7 +16,7 @@ export const RECEIVE_SOLARTERM_MAP = 'RECEIVE_SOLARTERM_MAP';
 
 export const DataTypes = {
   BY_SOLARTERM: 'By Solar Term',
-  BY_DATE: 'By Date',
+  // BY_DATE: 'By Date',
   BY_YEAR: 'By Year'
 };
 
@@ -131,17 +131,17 @@ export let fetchDataNeeded = () => (dispatch, getState) => {
 
   switch (state.chart.type) {
     case 'BY_YEAR': {
-      Object.keys(state.chart.years)
+      promises = Object.keys(state.chart.years)
         .filter(i => state.chart.years[i])
         .filter(i => typeof state.data.years[i] === 'undefined')
-        .map(i => promises.push(fetchYearData(dispatch, i)));
+        .map(i => fetchYearData(dispatch, i));
       break;
     }
     case 'BY_SOLARTERM': {
-      Object.keys(state.chart.solarTerm)
+      promises = Object.keys(state.chart.solarTerm)
         .filter(i => state.chart.solarTerm[i])
         .filter(i => typeof state.data.solarTerm[i] === 'undefined')
-        .map(i => promises.push(fetchSolarTermData(dispatch, i)));
+        .map(i => fetchSolarTermData(dispatch, i));
       break;
     }
     case 'BY_DATE': {

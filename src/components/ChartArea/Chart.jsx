@@ -6,19 +6,19 @@ import {getContentWidth, getContentHeight} from '../../redux/selectors/ui';
 import {getYearsData, getSolarTermData} from '../../redux/selectors/data';
 
 import Color from 'color';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend} from 'recharts';
 // CartesianGrid,
 
 class Chart extends React.Component {
   render() {
     const margin = {
-      top: 5,
+      top: 15,
       right: 30,
-      left: 20,
-      bottom: 5
+      left: -10,
+      bottom: 15
     };
 
-    let lines, keyName;
+    let lines, xAxis;
 
     switch (this.props.chartOptions.type) {
       case 'BY_SOLARTERM': {
@@ -29,7 +29,11 @@ class Chart extends React.Component {
             name: this.props.solarTermName[term],
             color: Color.hsl([term / 24 * -360 + 180, 75, 40]).string(),
           }));
-        keyName = 'year';
+        xAxis = [{
+          type: 'number',
+          key: 'year',
+          range: this.props.xRange
+        }];
         break;
       }
       case 'BY_YEAR': {
@@ -40,7 +44,18 @@ class Chart extends React.Component {
             color: Color.hsl([(i - 1900) / (2016 - 1900) * -240 + 240, 75, 40]).string(),
             name: `${i}`
           }));
-        keyName = 'id';
+        xAxis = [{
+          type: 'category',
+          key: 'date',
+          range: []
+        }, {
+          type: 'number',
+          key: 'number',
+          range: [1, 366]
+        }];
+        break;
+      }
+      case 'BY_DATE': {
         break;
       }
     }
@@ -51,15 +66,28 @@ class Chart extends React.Component {
         height={this.props.height}
         data={this.props.data}
         margin={margin}>
-        <XAxis
-          type="number"
-          dataKey={keyName}
-          domain={this.props.xRange}
-          />
+        {xAxis.map((axis, id) => (
+          <XAxis
+            type={axis.type}
+            dataKey={axis.key}
+            xAxisId={id}
+            key={axis.key}
+            domain={axis.range}
+            />
+        ))}
         <YAxis domain={[0, 40]}/>
         <Tooltip/>
         <Legend />
-        {lines.map(l => <Line key={l.key} type="monotone" dataKey={l.key} name={l.name} stroke={l.color} dot={false} />)}
+        {lines.map(l => (
+          <Line
+            key={l.key}
+            type="monotone"
+            dataKey={l.key}
+            name={l.name}
+            stroke={l.color}
+            dot={false}
+            connectNulls={true}
+          />))}
       </LineChart>
     );
     // <CartesianGrid strokeDasharray="30 5"/>

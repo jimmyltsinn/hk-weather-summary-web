@@ -42,10 +42,5 @@ export const getSolarTermData = createSelector(state => state.data.solarTerm, st
       })
   );
 
-  return ret
-    .filter(i => i.year < 1940 || i.year > 1946);
+  return ret;
 });
-
-// export const getDateData = createSelector(state => state.data.date, date => {
-//
-// });
