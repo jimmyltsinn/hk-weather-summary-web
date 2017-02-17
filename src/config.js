@@ -1,5 +1,5 @@
 let config = {};
 
-config.serverAddress = "http://127.0.0.1:3000";
+config.serverAddress = "//hk-weather-summary.herokuapp.com";
 
 export default config;
