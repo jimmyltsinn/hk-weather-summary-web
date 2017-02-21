@@ -56,7 +56,7 @@ ChartArea.propTypes = {
 
 const mapStateToProps = (state) => ({
   state,
-  isFetching: state.data.status.isFetching,
+  isFetching: state.data.status.isFetching > 0,
   width: getContentWidth(state),
   height: getContentHeight(state),
 });
