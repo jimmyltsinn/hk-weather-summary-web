@@ -2,6 +2,9 @@ import { createSelector } from 'reselect';
 import {range, round} from '../../util';
 import {LineTypes} from '../actions/chart';
 
+// let minCallback = (pre, cur) => Math.min(pre, cur);
+// let maxCallback = (pre, cur) => Math.max(pre, cur);
+
 export const getYearsData = createSelector(state => state.data.years, state => state.chart, (data, chartOptions) => {
   let map = {};
   let id = 0;
@@ -17,6 +20,8 @@ export const getYearsData = createSelector(state => state.data.years, state => s
 
   let ret = [];
 
+  let min = 1e99, max = -1e99;
+
   Object.keys(data)
     .map(year => Object.keys(data[year])
       .map(month => Object.keys(data[year][month])
@@ -31,16 +36,30 @@ export const getYearsData = createSelector(state => state.data.years, state => s
             .map(line => {
               if (LineTypes[line].keyName) {
                 ret[map[month][date]][`${year}-${LineTypes[line].id}`] = data[year][month][date][LineTypes[line].keyName];
+                min = Math.min(min, ret[map[month][date]][`${year}-${LineTypes[line].id}`]);
+                max = Math.max(max, ret[map[month][date]][`${year}-${LineTypes[line].id}`]);
               } else {
                 ret[map[month][date]][`${year}-${LineTypes[line].id}`] = round(LineTypes[line].transform.years(5, month, date, year, data[year]), 2);
+                min = Math.min(min, ret[map[month][date]][`${year}-${LineTypes[line].id}`]);
+                max = Math.max(max, ret[map[month][date]][`${year}-${LineTypes[line].id}`]);
               }});
         })));
 
-  return ret;
+  // let min = ret.reduce((pre, cur) => {
+  //
+  // }, 1e99);
+
+  return {
+    data: ret,
+    min,
+    max
+  };
 });
 
 export const getSolarTermData = createSelector(state => state.data.solarTerm, state => state.chart, (data, chartOptions) => {
   let ret = range(chartOptions.yearRange.min, chartOptions.yearRange.max).map(year => ({year}));
+
+  let min = 1e99, max = -1e99;
 
   Object.keys(data)
     .map(term => Object.keys(data[term])
@@ -51,12 +70,20 @@ export const getSolarTermData = createSelector(state => state.data.solarTerm, st
         .map(line => {
           if (LineTypes[line].keyName) {
             ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`] = data[term][year][LineTypes[line].keyName];
+            min = Math.min(min, ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`]);
+            max = Math.max(max, ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`]);
           } else {
             ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`] = round(LineTypes[line].transform.solarTerm(5, year, data[term]), 2);
+            min = Math.min(min, ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`]);
+            max = Math.max(max, ret[year - chartOptions.yearRange.min][`${term}-${LineTypes[line].id}`]);
           }
         });
       })
   );
 
-  return ret;
+  return {
+    data: ret,
+    min,
+    max
+  };
 });

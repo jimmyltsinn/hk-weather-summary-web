@@ -74,7 +74,7 @@ class Chart extends React.Component {
       <LineChart
         width={this.props.width}
         height={this.props.height}
-        data={this.props.data}
+        data={this.props.data.data}
         margin={margin}>
         {xAxis.map((axis, id) => (
           <XAxis
@@ -87,8 +87,8 @@ class Chart extends React.Component {
             />
         ))}
         <YAxis
-          domain={this.props.yAxisScale === 'fixed' ? [0, 40] : ['dataMin - 1', 'dataMax + 1']}
-          ticks={range(0, 40, 2)}
+          domain={this.props.yAxisScale === 'fixed' ? [0, 40] : [this.props.data.min - 1, this.props.data.max + 1]}
+          ticks={range(0, 40, 2).filter(i => this.props.yAxisScale == 'fixed' || (i > this.props.data.min - 1 && i < this.props.data.max + 1))}
           />
         <Tooltip/>
         <Legend />
@@ -114,7 +114,7 @@ Chart.propTypes = {
   height: React.PropTypes.number.isRequired,
   chartOptions: React.PropTypes.object.isRequired,
   xRange: React.PropTypes.array.isRequired,
-  data: React.PropTypes.array.isRequired,
+  data: React.PropTypes.object.isRequired,
   solarTermName: React.PropTypes.object,
   yAxisScale: React.PropTypes.string.isRequired
 };
