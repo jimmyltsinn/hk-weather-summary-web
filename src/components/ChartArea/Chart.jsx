@@ -33,6 +33,7 @@ class Chart extends React.Component {
               color: Color.hsl([term / 24 * -360 + 180, LineTypes[line].color.s, LineTypes[line].color.v]).string(),
             })));
         lines = [].concat.apply([], lines);
+
         xAxis = [{
           type: 'number',
           key: 'year',
@@ -86,7 +87,7 @@ class Chart extends React.Component {
             />
         ))}
         <YAxis
-          domain={[0, 40]}
+          domain={this.props.yAxisScale === 'fixed' ? [0, 40] : ['dataMin - 1', 'dataMax + 1']}
           ticks={range(0, 40, 2)}
           />
         <Tooltip/>
@@ -114,7 +115,8 @@ Chart.propTypes = {
   chartOptions: React.PropTypes.object.isRequired,
   xRange: React.PropTypes.array.isRequired,
   data: React.PropTypes.array.isRequired,
-  solarTermName: React.PropTypes.object
+  solarTermName: React.PropTypes.object,
+  yAxisScale: React.PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -123,7 +125,8 @@ const mapStateToProps = (state) => ({
   chartOptions: state.chart,
   xRange: state.chart.type == 'BY_YEAR' ? [1, 366] : [state.chart.yearRange.min, state.chart.yearRange.max],
   data: state.chart.type == 'BY_YEAR' ? getYearsData(state) : state.chart.type == 'BY_SOLARTERM' ? getSolarTermData(state) : state.data.date[state.chart.date.month][state.chart.date.date],
-  solarTermName: state.data.solarTerm.map
+  solarTermName: state.data.solarTerm.map,
+  yAxisScale: state.chart.yAxisScale
 });
 
 // const mapDispatchToProps = (dispatch) => ({

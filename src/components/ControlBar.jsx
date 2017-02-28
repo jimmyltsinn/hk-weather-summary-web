@@ -12,40 +12,46 @@ import SolarTermComponent from './ControlBar/SolarTermComponent';
 import YearComponent from './ControlBar/YearComponent';
 import DateComponent from './ControlBar/DateComponent';
 import LineComponent from './ControlBar/LineComponent';
+import YAxisScaleComponent from './ControlBar/YAxisScaleComponent';
 
 const ControlBar = (props) => {
-  const SelectChartType = (
+  const selectChartType = (
     <ChartTypeComponent key="selectChartType" />
   );
 
-  const SelectYearRange = (
+  const selectYearRange = (
     <YearRangeComponent key="selectYearRange" />
   );
 
-  const SelectSolarTerm = (
+  const selectSolarTerm = (
     <SolarTermComponent key="selectSolarTerm" />
   );
 
-  const SelectYear = (
+  const selectYear = (
     <YearComponent key="selectYear" />
   );
 
-  const SelectDate = (
+  const selectDate = (
     <DateComponent key="selectDate" />
   );
 
-  const SelectLine = (
+  const selectLine = (
     <LineComponent key="selectLine" />
+  );
+
+  const selectYAxisScale = (
+    <YAxisScaleComponent key="selectYAxisScale" />
   );
 
   return (
     <Toolbar>
       <ToolbarGroup>
-        {SelectChartType}
-        {SelectLine}
+        {selectChartType}
+        {selectLine}
+        {selectYAxisScale}
       </ToolbarGroup>
       <ToolbarGroup>
-        {props.chartType == 'BY_YEAR' ? [SelectYear] : props.chartType == 'BY_SOLARTERM' ? [SelectYearRange, SelectSolarTerm] : [SelectYearRange, SelectDate]}
+        {props.chartType == 'BY_YEAR' ? [selectYear] : props.chartType == 'BY_SOLARTERM' ? [selectYearRange, selectSolarTerm] : [selectYearRange, selectDate]}
       </ToolbarGroup>
     </Toolbar>
   );
