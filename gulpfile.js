@@ -1,4 +1,5 @@
 let gulp = require('gulp');
+let guppy = require('git-guppy')(gulp);
 let gutil = require("gulp-util");
 
 // let debug = require('gulp-debug');
@@ -37,5 +38,7 @@ gulp.task('lint', () => {
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
+
+gulp.task('pre-commit', ['lint', 'webpack']);
 
 gulp.task('default', ['webpack-dev-server']);
