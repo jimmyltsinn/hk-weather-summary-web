@@ -8,6 +8,7 @@ export const SELECT_CHART_DATE_MONTH = 'SELECT_CHART_DATE_MONTH';
 export const SELECT_CHART_DATE_DATE = 'SELECT_CHART_DATE_DATE';
 export const SELECT_CHART_YEARS_TOGGLE = 'SELECT_CHART_YEARS_TOGGLE';
 export const SELECT_CHART_LINES_TOGGLE = 'SELECT_CHART_LINES_TOGGLE';
+export const SELECT_CHART_YAXIS_SCALE = 'SELECT_CHART_YAXIS_SCALE';
 
 export {DataTypes as ChartTypes} from './data';
 
@@ -93,54 +94,114 @@ export const LineTypes = {
 // };
 
 export let selectChartType = chartType => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_TYPE,
   chartType
 });
 
 export let selectChartLines = lines => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_LINES,
   lines
 });
 
 export let selectChartYears = years => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_YEARS,
   years
 });
 
 export let selectChartYearRange = (range) => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_YEARRANGE,
   yearRange: range
 });
 
 export let selectChartSolarTerm = solarTerm => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_SOLARTERM,
   solarTerm
 });
 
 export let toggleSolarTerm = (solarTerm, selected) => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_SOLARTERM_TOGGLE,
   solarTerm,
   selected
 });
 
 export let selectChartDateMonth = month => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_DATE_MONTH,
   month
 });
 
 export let selectChartDateDate = date => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_DATE_DATE,
   date
 });
 
 export let toggleYear = (year, selected) => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_YEARS_TOGGLE,
   year,
   selected
 });
 
 export let toggleLine = (line, selected) => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
   type: SELECT_CHART_LINES_TOGGLE,
   line,
   selected
+});
+
+export let selectYAxisScale = (scale) => ({
+  meta: {
+    analytics: {
+      category: 'chart'
+    }
+  },
+  type: SELECT_CHART_YAXIS_SCALE,
+  scale
 });

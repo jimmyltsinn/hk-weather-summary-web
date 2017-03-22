@@ -56,7 +56,7 @@ class SolarTermComponent extends React.Component {
             leftCheckbox={
               <Checkbox
                 checked={this.props.checked[i] ? true : false}
-                onCheck={(element, checked) => this.props.toggleSolarTerm(i, checked)}
+                onCheck={(event, checked) => this.props.toggleSolarTerm(i, checked)}
                 />
             }
             primaryText={this.props.map[i]} />))

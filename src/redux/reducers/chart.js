@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import {
   SELECT_CHART_TYPE, SELECT_CHART_LINES, SELECT_CHART_YEARS, SELECT_CHART_YEARRANGE, SELECT_CHART_SOLARTERM,
-  SELECT_CHART_SOLARTERM_TOGGLE, SELECT_CHART_DATE_MONTH, SELECT_CHART_DATE_DATE, SELECT_CHART_YEARS_TOGGLE, SELECT_CHART_LINES_TOGGLE,
+  SELECT_CHART_SOLARTERM_TOGGLE, SELECT_CHART_DATE_MONTH, SELECT_CHART_DATE_DATE, SELECT_CHART_YEARS_TOGGLE, SELECT_CHART_LINES_TOGGLE, SELECT_CHART_YAXIS_SCALE
   // ChartTypes
 } from '../actions/chart';
 
@@ -85,13 +85,21 @@ function date(state = {
   }
 }
 
+function yAxisScale(state = 'fixed', action) {
+  switch (action.type) {
+    case SELECT_CHART_YAXIS_SCALE: return action.scale;
+    default: return state;
+  }
+}
+
 const chart = combineReducers({
   type,
   lines,
   years,
   yearRange,
   solarTerm,
-  date
+  date,
+  yAxisScale
 });
 
 export default chart;

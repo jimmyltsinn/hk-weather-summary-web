@@ -7,10 +7,12 @@
   "devDependencies": {
     "eslint": "^3.14.1",
     "eslint-plugin-react": "^6.9.0",
+    "git-guppy": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-debug": "^3.0.0",
     "gulp-eslint": "^3.0.1",
     "gulp-util": "^3.0.8",
+    "guppy-pre-commit": "^0.4.0",
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
@@ -28,6 +30,7 @@
     "material-ui": "^0.16.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-ga": "^2.1.2",
     "react-input-range": "^1.0.2",
     "react-redux": "^5.0.2",
     "react-tap-event-plugin": "^2.0.1",
@@ -35,6 +38,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-persist": "^4.4.1",
+    "redux-tap": "^0.2.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
     "style-loader": "^0.13.1",

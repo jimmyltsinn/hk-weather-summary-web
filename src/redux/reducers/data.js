@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 
 import {
-  REQUEST_DATA, RECEIVE_DATA,
-  REQUEST_SOLARTERM_MAP, RECEIVE_SOLARTERM_MAP,
+  // REQUEST_DATA, RECEIVE_DATA,
+  // REQUEST_SOLARTERM_MAP,
+  RECEIVE_SOLARTERM_MAP,
   RECEIVE_DATA_YEAR, RECEIVE_DATA_SOLARTERM, RECEIVE_DATA_DATE,
   START_FETCH, COMPLETE_FETCH,
-  DataTypes
+  // DataTypes
 } from '../actions/data';
 
 function years(state = {}, action) {
