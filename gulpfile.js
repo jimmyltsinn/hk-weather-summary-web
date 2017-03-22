@@ -7,6 +7,7 @@ let gutil = require("gulp-util");
 let eslint = require('gulp-eslint');
 let webpack = require("webpack");
 let WebpackDevServer = require("webpack-dev-server");
+let ghPages = require('gulp-gh-pages');
 
 let webpackConfig = () => {
   let ret = require('./webpack.config.js');
@@ -33,13 +34,20 @@ gulp.task('webpack-dev-server', (cb) => {
   });
 });
 
-gulp.task('lint', () => {
-  return gulp.src(['src/**/*.js', 'src/**/*.jsx', '!src/plot-sample/**.jsx'])
+gulp.task('lint', () => (
+  gulp.src(['src/**/*.js', 'src/**/*.jsx', '!src/plot-sample/**.jsx'])
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
+    .pipe(eslint.failAfterError())
+));
+
+gulp.task('deploy', () => (
+  gulp.src('./dist/**/*')
+    .pipe(ghPages())
+));
 
 gulp.task('pre-commit', ['lint', 'webpack'], () => gulp.src('./dist/').pipe(git.add()));
+
+gulp.task('pre-push', ['deploy']);
 
 gulp.task('default', ['webpack-dev-server']);

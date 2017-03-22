@@ -11,9 +11,11 @@
     "gulp": "^3.9.1",
     "gulp-debug": "^3.0.0",
     "gulp-eslint": "^3.0.1",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-git": "^2.1.0",
     "gulp-util": "^3.0.8",
     "guppy-pre-commit": "^0.4.0",
+    "guppy-pre-push": "^0.2.1",
     "webpack-bundle-analyzer": "^2.3.0",
     "webpack-dev-server": "^2.3.0"
   },
