@@ -1,0 +1,59 @@
+{
+  "ui": {
+    "theme": {muiThemeObj},
+    "window": {
+      "width": 0,
+      "height": 0
+    }
+  },
+  "chart": {
+    "type": ("BY_YEAR" / "BY_SOLARTERM" / "BY_DATE"),
+    "lines": {
+      "temp_avg": true,
+      "temp_min": false,
+      ...
+    },
+    "years": {
+      "2016": true,
+    },
+    "yearRange": {
+      "min": 1900,
+      "max": 2016
+    },
+    "solarTerm": {
+      "1": true,
+      "2": false,
+      ...
+    },
+    "date": {
+      "month": 1,
+      "date": 1
+    }
+  },
+  "data": {
+    "years": {
+      "2016": {
+        "isFetching": true,
+        "data": []
+      }, ...
+    },
+    "solarTerm": {
+      "map": {
+        "1": "XXX",
+        ...
+      }
+      "1": {
+        "isFetching": false,
+        "data": []
+      }, ...
+    },
+    "date": {
+      "1": {
+        "27": {
+          "isFetching": false,
+          "data": []
+        }, ...
+      }
+    }
+  }
+}
